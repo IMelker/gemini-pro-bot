@@ -35,9 +35,10 @@ class GeminiTelegramBot:
             BotCommand(command='new', description='Reset chat session')
         ]
 
-        self.group_commands = [BotCommand(
-            command='chat', description='Send a message to the bot'
-        )] + self.commands
+        self.group_commands = [
+            BotCommand(command='chat', description='Send a message to the bot'),
+            BotCommand(command='vision', description='Describe what on photo')
+        ] + self.commands
 
     async def post_init(self, application: Application) -> None:
         """
