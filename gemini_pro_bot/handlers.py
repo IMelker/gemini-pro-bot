@@ -1,3 +1,4 @@
+import logging
 import asyncio
 from gemini_pro_bot.llm import model, img_model
 from google.generativeai.types.generation_types import (
@@ -13,6 +14,13 @@ from telegram.constants import ChatAction, ParseMode
 from gemini_pro_bot.html_format import format_message
 import PIL.Image as load_image
 from io import BytesIO
+
+
+async def error_handler(_: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """
+    Handles errors in the telegram-python-bot library.
+    """
+    logging.error(f'Exception while handling an update: {context.error}')
 
 
 def new_chat(context: ContextTypes.DEFAULT_TYPE) -> None:
