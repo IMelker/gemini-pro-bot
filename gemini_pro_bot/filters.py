@@ -23,4 +23,4 @@ class AuthorizedUserFilter(UpdateFilter):
 AuthFilter = AuthorizedUserFilter()
 MessageFilter = AuthFilter & ~COMMAND & TEXT
 PhotoFilter = AuthFilter & ~COMMAND & PHOTO
-ChatFilter = AuthFilter & (ChatType.GROUP | ChatType.SUPERGROUP)
+GroupMessageFilter = AuthFilter & (ChatType.GROUP | ChatType.SUPERGROUP)

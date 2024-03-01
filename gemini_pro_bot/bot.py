@@ -8,7 +8,7 @@ from telegram.ext import (
     Application,
     ApplicationBuilder,
 )
-from gemini_pro_bot.filters import AuthFilter, MessageFilter, PhotoFilter, ChatFilter
+from gemini_pro_bot.filters import AuthFilter, MessageFilter, PhotoFilter, GroupMessageFilter
 from dotenv import load_dotenv
 from gemini_pro_bot.handlers import (
     start,
@@ -64,8 +64,9 @@ class GeminiTelegramBot:
         application.add_handler(CommandHandler("help", help_command, filters=AuthFilter))
         application.add_handler(CommandHandler("new", newchat_command, filters=AuthFilter))
 
-        # group chat command
-        application.add_handler(CommandHandler('chat', handle_message, filters=ChatFilter))
+        # group chat commands
+        application.add_handler(CommandHandler('chat', handle_message, filters=GroupMessageFilter))
+        application.add_handler(CommandHandler('vision', handle_image, filters=GroupMessageFilter))
 
         # Any text message is sent to LLM to generate a response
         application.add_handler(MessageHandler(MessageFilter, handle_message))

@@ -147,6 +147,10 @@ async def handle_image(update: Update, _: ContextTypes.DEFAULT_TYPE) -> None:
         text="Generating...", reply_to_message_id=update.message.message_id
     )
     images = update.message.photo
+    if len(images) == 0:
+        await init_msg.edit_text("Looks like no image provided. Please add image and try again.")
+        return
+
     unique_images: dict = {}
     for img in images:
         file_id = img.file_id[:-7]
